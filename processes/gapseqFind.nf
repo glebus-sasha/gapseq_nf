@@ -9,15 +9,17 @@ process gapseqFind {
     path genome
 
     output:
-    path "*"
+    path "*-Pathways.tbl", emit: pathways
+    path "*-Reactions.tbl", emit: reactions
 
     script:
     """
-    gapseq find -p all -b 100 -m Bacteria $genome
+    gapseq find  -p all -b 100 -m Bacteria $genome
     """
 
     stub:
     """
-    touch 123.txt
+    touch ${genome.baseName}-Pathways.tbl
+    touch ${genome.baseName}-Reactions.tbl
     """
 }

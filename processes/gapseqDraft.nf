@@ -8,13 +8,17 @@ process gapseqDraft {
 
     input:
     path genome
+    path transporter
+    path pathways
+    path reactions
 
     output:
-    path "*"
+    path "${genome.baseName}-all-Pathways.tbl", emit: all_pathways
+    path "*.-draft.RDS",                        emit: draft_rds
 
     script:
     """
-    gapseq draft -r $shname-all-Reactions.tbl -t $shname-Transporter.tbl -p $shname-all-Pathways.tbl -c $filename -u 100 -l 50
+    gapseq draft -r $reactions -t $pathways -p ${genome.baseName}-all-Pathways.tbl -c $genome -u 100 -l 50
     """
 
     stub:

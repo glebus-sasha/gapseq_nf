@@ -9,7 +9,7 @@ process gapseqFindTransport {
     path genome
 
     output:
-    path "*"
+    path "${genome.baseName}-Transporter.tbl"
 
     script:
     """
@@ -18,6 +18,6 @@ process gapseqFindTransport {
 
     stub:
     """
-    touch 123.txt
+    touch ${genome.baseName}-Transporter.tbl
     """
 }
